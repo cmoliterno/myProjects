@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, forwardRef } from '@angular/core';
+import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { RadioOption } from './radio-option.model';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'mt-radio',
@@ -13,12 +13,14 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     }
   ]
 })
+
 export class RadioComponent implements OnInit, ControlValueAccessor {
 
   @Input() options: RadioOption[];
 
   value: any;
-  onChange : any;
+
+  onChange: any;
 
   constructor() { }
 
@@ -30,14 +32,35 @@ export class RadioComponent implements OnInit, ControlValueAccessor {
     this.onChange(this.value);
   }
 
-  writeValue(obj : any): void{
+  /**
+   * Write a new value to the element.
+   */
+  writeValue(obj: any): void {
     this.value = obj;
   }
 
-  registerOnChange(fn: any): void{
+  /**
+   * Set the function to be called when the control receives a change event.
+   */
+  registerOnChange(fn: any): void {
     this.onChange = fn;
   }
 
-  registerOnTouched(){
+  /**
+   * Set the function to be called when the control receives a touch event.
+   */
+  registerOnTouched(fn: any): void{
+
   }
+
+  /**
+   * This function is called when the control status changes to or from "DISABLED".
+   * Depending on the value, it will enable or disable the appropriate DOM element.
+   *
+   * @param isDisabled
+   */
+  setDisabledState?(isDisabled: boolean): void{
+
+  }
+
 }
